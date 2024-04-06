@@ -13,7 +13,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Utilisateur {
