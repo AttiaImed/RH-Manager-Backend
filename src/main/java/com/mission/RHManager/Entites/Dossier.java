@@ -7,10 +7,6 @@ import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 @Entity
 @Getter
 @Setter
@@ -20,18 +16,10 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Calendrier {
+public class Dossier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long idCalendrier;
-
-
-     int annee;
-
-   /**  List<String> joursFeries;
-     List<String> evenementsSpeciaux;
-     List<Conge> congesPlanifies;**/
-
-     int joursOuvrables;
-
+     Long idDossier;
+     int num;
+     String nom;
 }
