@@ -7,9 +7,7 @@ import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -20,18 +18,13 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Calendrier {
+public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long idCalendrier;
+     long idEquipe;
 
+     String nom ;
 
-     int annee;
-
-   /**  List<String> joursFeries;
-     List<String> evenementsSpeciaux;
-     List<Conge> congesPlanifies;**/
-
-     int joursOuvrables;
+     String domaine;
 
 }

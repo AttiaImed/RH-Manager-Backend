@@ -19,30 +19,7 @@ import lombok.experimental.FieldDefaults;
 public class Reclamation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String reclamation;
+    Long id;
+    String reclamation;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getReclamation() {
-        return reclamation;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setReclamation(String reclamation) {
-        this.reclamation = reclamation;
-    }
-
-    @Override
-    public String toString() {
-        return "Reclamation{" +
-                "id=" + id +
-                ", reclamation='" + reclamation + '\'' +
-                '}';
-    }
 }
