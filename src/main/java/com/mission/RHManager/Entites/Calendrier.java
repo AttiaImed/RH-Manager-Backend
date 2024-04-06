@@ -7,6 +7,10 @@ import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Entity
 @Getter
 @Setter
@@ -19,60 +23,15 @@ import lombok.experimental.FieldDefaults;
 public class Calendrier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String date;
-    private String heure;
-    private String type;
-    private String description;
+    private Long idCalendrier;
 
-    public Long getId() {
-        return id;
-    }
 
-    public String getDate() {
-        return date;
-    }
+    private int annee;
 
-    public String getHeure() {
-        return heure;
-    }
+   /**  List<String> joursFeries;
+     List<String> evenementsSpeciaux;
+     List<Conge> congesPlanifies;**/
 
-    public String getType() {
-        return type;
-    }
+    private int joursOuvrables;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setHeure(String heure) {
-        this.heure = heure;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Calendrier{" +
-                "id=" + id +
-                ", date='" + date + '\'' +
-                ", heure='" + heure + '\'' +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
