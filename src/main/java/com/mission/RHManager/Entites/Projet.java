@@ -21,15 +21,15 @@ import java.time.LocalDate;
 public class Projet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idProjet;
+     long idProjet;
 
-    private String nom ;
+     String nom ;
 
-    private String description;
+     String description;
 
-    private String status;
+     String status;
 
-    private LocalDate dateDebut;
+     LocalDate dateDebut;
 
-    private LocalDate dateFin;
+     LocalDate dateFin;
 }

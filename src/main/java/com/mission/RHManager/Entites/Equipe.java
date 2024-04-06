@@ -21,10 +21,10 @@ import java.time.LocalDate;
 public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEquipe;
+     long idEquipe;
 
-    private String nom ;
+     String nom ;
 
-    private String domaine;
+     String domaine;
 
 }

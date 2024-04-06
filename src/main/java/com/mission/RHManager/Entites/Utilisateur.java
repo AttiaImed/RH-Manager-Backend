@@ -19,18 +19,18 @@ import lombok.experimental.FieldDefaults;
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nom;
-    private String prenom;
-    private String email;
-    private String password;
-    private String role;
-    private Long idUtilisateur;
+     Long id;
+     String nom;
+     String prenom;
+     String email;
+     String password;
+     String role;
+     Long idUtilisateur;
 
-    private TypeUser type;
+     TypeUser type;
 
-    private String login;
-    private String motDePasse;
-    private boolean status;
+     String login;
+     String motDePasse;
+     boolean status;
 
 }

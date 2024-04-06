@@ -23,15 +23,15 @@ import java.util.List;
 public class Calendrier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCalendrier;
+     Long idCalendrier;
 
 
-    private int annee;
+     int annee;
 
    /**  List<String> joursFeries;
      List<String> evenementsSpeciaux;
      List<Conge> congesPlanifies;**/
 
-    private int joursOuvrables;
+     int joursOuvrables;
 
 }

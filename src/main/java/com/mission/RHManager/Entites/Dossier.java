@@ -19,7 +19,7 @@ import lombok.experimental.FieldDefaults;
 public class Dossier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idDossier;
-    private int num;
-    private String nom;
+     Long idDossier;
+     int num;
+     String nom;
 }

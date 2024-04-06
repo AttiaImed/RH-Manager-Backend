@@ -23,16 +23,16 @@ public class Tache {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTache;
+     Long idTache;
 
-    private String nom;
-    private String description;
-    private TacheStatus status;
-    private Long supervisorId;
-    private int progress;
-    private boolean priority;
-    private String comments;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+     String nom;
+     String description;
+     TacheStatus status;
+     Long supervisorId;
+     int progress;
+     boolean priority;
+     String comments;
+     LocalDate dateDebut;
+     LocalDate dateFin;
 
 }
