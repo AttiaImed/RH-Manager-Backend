@@ -7,7 +7,7 @@ import com.mission.RHManager.Entites.Tache;
 import com.mission.RHManager.Repositories.DossierRepository;
 import com.mission.RHManager.Repositories.EquipeRepository;
 import com.mission.RHManager.Repositories.ProjetRepository;
-import com.mission.RHManager.Services.ProjetService;
+import com.mission.RHManager.Services.Projet.ProjetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.mission.RHManager.Controller.Project;
 
 import com.mission.RHManager.Entites.Dossier;
-import com.mission.RHManager.Services.DossierService;
+import com.mission.RHManager.Services.Projet.DossierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

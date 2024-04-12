@@ -2,7 +2,7 @@ package com.mission.RHManager.Services.Impl.Project;
 
 import com.mission.RHManager.Entites.Dossier;
 import com.mission.RHManager.Repositories.DossierRepository;
-import com.mission.RHManager.Services.DossierService;
+import com.mission.RHManager.Services.Projet.DossierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

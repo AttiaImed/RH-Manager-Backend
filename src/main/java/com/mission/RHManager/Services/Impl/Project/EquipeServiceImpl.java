@@ -2,7 +2,7 @@ package com.mission.RHManager.Services.Impl.Project;
 
 import com.mission.RHManager.Entites.Equipe;
 import com.mission.RHManager.Repositories.EquipeRepository;
-import com.mission.RHManager.Services.EquipeService;
+import com.mission.RHManager.Services.Projet.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
