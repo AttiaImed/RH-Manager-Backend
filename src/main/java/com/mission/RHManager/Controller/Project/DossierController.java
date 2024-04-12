@@ -38,9 +38,8 @@ public class DossierController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Dossier> getDossier(@PathVariable Long id) {
-        Optional<Dossier> dossier = dossierService.getDossier(id);
-        return dossier.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        Dossier dossier = dossierService.getDossier(id);
+        return new ResponseEntity<Dossier>(dossier, HttpStatus.OK);
     }
 
     @GetMapping
