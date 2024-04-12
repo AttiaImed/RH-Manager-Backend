@@ -37,6 +37,10 @@ public class DossierServiceImpl implements DossierService {
 
     @Override
     public List<Dossier> getAllDossier() {
-        return dossierRepository.findAll();
+        List<Dossier> dossiers = dossierRepository.findAll();
+        if(dossiers.isEmpty()) {
+            throw new RuntimeException("No dossiers found");
+        }
+        return dossiers;
     }
 }
