@@ -24,8 +24,9 @@ public class DossierController {
         return new ResponseEntity<Dossier>(HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<Dossier> updateDossier(@RequestBody Dossier dossier) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Dossier> updateDossier(@PathVariable Long id,@RequestBody Dossier dossier) {
+        dossier.setId(id); // Set the ID from the path variable into the Dossier object
         Dossier dossierResponse = dossierService.updateDossier(dossier);
         return new ResponseEntity<Dossier>(dossierResponse,HttpStatus.OK);
     }

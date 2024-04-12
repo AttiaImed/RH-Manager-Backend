@@ -22,6 +22,22 @@ public class DossierServiceImpl implements DossierService {
 
     @Override
     public Dossier updateDossier(Dossier dossier) {
+        Dossier dossierToUpdate = dossierRepository.findById(dossier.getId()).get();
+        if (dossier.getNom() != null) {
+            dossierToUpdate.setNom(dossier.getNom());
+        }
+        if (dossier.getGoals() != null) {
+            dossierToUpdate.setGoals(dossier.getGoals());
+        }
+        if (dossier.getStatus() != null) {
+            dossierToUpdate.setStatus(dossier.getStatus());
+        }
+        if (dossier.getTaches() != null) {
+            dossierToUpdate.setTaches(dossier.getTaches());
+        }
+        if (dossier.getProjet() != null) {
+            dossierToUpdate.setProjet(dossier.getProjet());
+        }
         return dossierRepository.save(dossier);
     }
 
