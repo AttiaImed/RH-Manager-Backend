@@ -16,8 +16,8 @@ public class ReclamationController {
     private ReclamationService reclamationService;
     @PostMapping
     public ResponseEntity<Reclamation> createReclamation(@RequestBody Reclamation reclamation) {
-        Reclamation savedReclamation = reclamationService.saveReclamation(reclamation);
-        return new ResponseEntity<>(savedReclamation, HttpStatus.CREATED);
+        Reclamation reclamationResponse = reclamationService.saveReclamation(reclamation);
+        return new ResponseEntity<Reclamation>(HttpStatus.CREATED);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Reclamation> getReclamationById(@PathVariable Long id) {
