@@ -1,11 +1,11 @@
 package com.mission.RHManager.Entites;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,7 +19,20 @@ import lombok.experimental.FieldDefaults;
 public class Dossier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long idDossier;
+     long id;
      int num;
      String nom;
+     @OneToMany(mappedBy = "dossier")
+     List<Tache> taches = new ArrayList<Tache>();
+     @ManyToOne
+     Projet projet;
+     String goals;
+     String status;
+    public void addTask(Tache task) {
+        if(this.taches.isEmpty()) {
+            this.taches.add(0, task);
+        }else {
+            this.taches.add(task);
+        }
+    }
 }

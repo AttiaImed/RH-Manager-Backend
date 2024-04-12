@@ -1,14 +1,13 @@
 package com.mission.RHManager.Entites;
 
 import com.mission.RHManager.Entites.Enum.TacheStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,16 +22,23 @@ public class Tache {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long idTache;
+    long id;
 
      String nom;
      String description;
+     @Enumerated(EnumType.STRING)
      TacheStatus status;
-     Long supervisorId;
      int progress;
      boolean priority;
      String comments;
      LocalDate dateDebut;
      LocalDate dateFin;
-
+     @ManyToOne
+     Dossier dossier;
+     @OneToOne
+     Utilisateur superviser;
+     @OneToMany
+     List<Utilisateur> members;
+     @OneToMany(mappedBy = "tache")
+     List<SousTache> sousTaches = new ArrayList<SousTache>();
 }

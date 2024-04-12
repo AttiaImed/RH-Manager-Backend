@@ -1,9 +1,10 @@
 package com.mission.RHManager.Entites;
 
-import com.mission.RHManager.Entites.Enum.TypeFeedBack;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.Date;
 
 @Entity
 @Getter
@@ -14,17 +15,15 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class FeedBack {
+public class SousTache {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
-     String feedBack;
-     @Enumerated(EnumType.STRING)
-     TypeFeedBack typeFeedBack;
-
-
-
-
-     @Enumerated(EnumType.STRING)
-    TypeFeedBack typeFeedBack;
+    long id;
+    String text;
+    boolean isChecked; // Changed column name to avoid conflict with SQL reserved keyword
+    Date updated;
+    @OneToOne
+    Utilisateur user;
+    @ManyToOne
+    Tache tache;
 }
