@@ -1,11 +1,11 @@
 package com.mission.RHManager.Entites;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.mission.RHManager.Entites.Enum.TypeReclamation;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -20,6 +20,14 @@ public class Reclamation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String reclamation;
+    LocalDate dateSoumission;
+    LocalDate dateCloture;
+    String titre;
+    String description;
+    @Enumerated(EnumType.STRING)
+    TypeReclamation typeReclamation;
+
+    @ManyToOne
+    Utilisateur utilisateurReclamation;
 
 }

@@ -1,12 +1,11 @@
 package com.mission.RHManager.Entites;
 
 import com.mission.RHManager.Entites.Enum.TypeUser;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,14 +22,10 @@ public class Utilisateur {
      String nom;
      String prenom;
      String email;
-     String password;
-     String role;
-     Long idUtilisateur;
-
-     TypeUser type;
-
      String login;
-     String motDePasse;
+     String password;
      boolean status;
+     @Enumerated(EnumType.STRING)
+     TypeUser type;
 
 }
