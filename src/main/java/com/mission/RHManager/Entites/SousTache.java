@@ -4,11 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -19,17 +15,15 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Projet {
+public class SousTache {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String projectName;
-    String projectDesc;
+    String text;
+    boolean isChecked; // Changed column name to avoid conflict with SQL reserved keyword
+    Date updated;
+    @OneToOne
+    Utilisateur user;
     @ManyToOne
-    Equipe team;
-    String status;
-    LocalDateTime startDate;
-    Date endDate;
-    @OneToMany(mappedBy = "projet")
-    List<Dossier> dossiers = new ArrayList<>();
+    Tache tache;
 }
