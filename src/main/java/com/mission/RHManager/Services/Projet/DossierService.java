@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DossierService {
-    void addDossier(Dossier dossier);
-    void updateDossier(Dossier dossier);
+    Dossier addDossier(Dossier dossier);
+    Dossier updateDossier(Dossier dossier);
     void deleteDossier(Long id);
-    Optional<Dossier> getDossier(Long id);
+    Dossier getDossier(Long id);
     List<Dossier> getAllDossier();
 }

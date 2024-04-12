@@ -16,13 +16,13 @@ public class DossierServiceImpl implements DossierService {
     DossierRepository dossierRepository;
 
     @Override
-    public void addDossier(Dossier dossier) {
-        dossierRepository.save(dossier);
+    public Dossier addDossier(Dossier dossier) {
+        return dossierRepository.save(dossier);
     }
 
     @Override
-    public void updateDossier(Dossier dossier) {
-        dossierRepository.save(dossier);
+    public Dossier updateDossier(Dossier dossier) {
+        return dossierRepository.save(dossier);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class DossierServiceImpl implements DossierService {
     }
 
     @Override
-    public Optional<Dossier> getDossier(Long id) {
-        return dossierRepository.findById(id);
+    public Dossier getDossier(Long id) {
+        return dossierRepository.findById(id).get();
     }
 
     @Override

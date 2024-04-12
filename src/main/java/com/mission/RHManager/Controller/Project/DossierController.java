@@ -19,16 +19,15 @@ public class DossierController {
     DossierService dossierService;
 
     @PostMapping
-    public ResponseEntity<Void> addDossier(@RequestBody Dossier dossier) {
-        dossierService.addDossier(dossier);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<Dossier> addDossier(@RequestBody Dossier dossier) {
+        Dossier dossierResponse = dossierService.addDossier(dossier);
+        return new ResponseEntity<Dossier>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateDossier(@PathVariable Long id, @RequestBody Dossier dossier) {
-        dossier.setId(id); // Set the ID from the path variable into the Dossier object
-        dossierService.updateDossier(dossier);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping
+    public ResponseEntity<Dossier> updateDossier(@RequestBody Dossier dossier) {
+        Dossier dossierResponse = dossierService.updateDossier(dossier);
+        return new ResponseEntity<Dossier>(dossierResponse,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
