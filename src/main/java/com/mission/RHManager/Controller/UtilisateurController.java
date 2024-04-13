@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("utilisateur")
 @AllArgsConstructor
 public class UtilisateurController {
     private UtilisateurService utilisateurService;
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Utilisateur> createUtilisateur(@RequestBody Utilisateur utilisateur) {
         Utilisateur savedUtilisateur = utilisateurService.saveUtilisateur(utilisateur);
         return new ResponseEntity<>(savedUtilisateur, HttpStatus.CREATED);
@@ -32,13 +33,13 @@ public class UtilisateurController {
         }
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<Utilisateur>> getAllUtilisateurs() {
         List<Utilisateur> utilisateurs = utilisateurService.getAllUtilisateurs();
         return new ResponseEntity<>(utilisateurs, HttpStatus.OK);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Utilisateur> updateUtilisateur(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
         Utilisateur updatedUtilisateur = utilisateurService.updateUtilisateur(id, utilisateur);
         if (updatedUtilisateur != null) {
@@ -48,7 +49,7 @@ public class UtilisateurController {
         }
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUtilisateur(@PathVariable Long id) {
         utilisateurService.deleteUtilisateur(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
