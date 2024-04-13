@@ -14,29 +14,29 @@ import java.util.List;
 @RequestMapping("/FeedBack")
 @AllArgsConstructor
 public class FeedBackController {
-    private final FeedBackService feedbackService;
+    private final FeedBackService feedBackService;
 
     @GetMapping
     public ResponseEntity<List<FeedBack>> getAllFeedback() {
-        List<FeedBack> feedBacks = feedbackService.getAllFeedBack();
+        List<FeedBack> feedBacks = feedBackService.getAllFeedBack();
         return new ResponseEntity<>(feedBacks, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<FeedBack> addFeedback(@RequestBody FeedBack feedBack) {
-        FeedBack FeedBackresponse = feedbackService.addFeedback(feedBack);
+        FeedBack FeedBackresponse = feedBackService.addFeedback(feedBack);
         return new ResponseEntity<FeedBack>(HttpStatus.CREATED);
 
     }
     @PutMapping("/{id}")
     public ResponseEntity<FeedBack> updateFeedBack(@PathVariable Long id, @RequestBody FeedBack feedBack) {
         feedBack.setId(id);
-        feedbackService.updateFeedBack(feedBack);
+        feedBackService.updateFeedBack(feedBack);
         return new ResponseEntity<>(feedBack, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteFeedBack(@PathVariable Long id) {
-        feedbackService.deleteFeedBack(id);
+        feedBackService.deleteFeedBack(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
