@@ -1,11 +1,10 @@
 package com.mission.RHManager.Entites;
 
-import com.mission.RHManager.Entites.Enum.TypeUser;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -13,19 +12,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Utilisateur {
+public class SousTache {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
-     String nom;
-     String prenom;
-     String email;
-     String login;
-     String password;
-     boolean status;
-     @Enumerated(EnumType.STRING)
-     TypeUser type;
-
+    long id;
+    String text;
+    boolean isChecked; // Changed column name to avoid conflict with SQL reserved keyword
+    Date updated;
+    @OneToOne
+    Utilisateur user;
+    @ManyToOne
+    Tache tache;
 }

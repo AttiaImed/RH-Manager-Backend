@@ -1,13 +1,13 @@
 package com.mission.RHManager.Entites;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.mission.RHManager.Services.UtilisateurService;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,10 +21,20 @@ import java.time.LocalDate;
 public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     long idEquipe;
-
+     long id;
      String nom ;
-
-     String domaine;
-
+     String status;
+     @OneToMany(mappedBy = "team")
+    List<Projet> projets = new ArrayList<>();
+     @OneToMany
+     List<Utilisateur> membres = new ArrayList<>();
+     @OneToOne
+     Utilisateur chef;
+    public void addProject(Projet project) {
+        if(this.projets.isEmpty()) {
+            this.projets.add(0, project);
+        }else{
+            this.projets.add(project);
+        }
+    }
 }
