@@ -1,17 +1,16 @@
 package com.mission.RHManager.Services.Impl.Reclamation;
 
-import com.mission.RHManager.Entites.Dossier;
 import com.mission.RHManager.Entites.FeedBack;
-import com.mission.RHManager.Repositories.FeedbackRepository;
-import com.mission.RHManager.Services.Reclamation.FeedbackService;
+import com.mission.RHManager.Repositories.FeedBackRepository;
+import com.mission.RHManager.Services.Reclamation.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class FeedbackServiceImpl implements FeedbackService {
+public class FeedBackServiceImpl implements FeedBackService {
     @Autowired
-    FeedbackRepository feedbackRepository;
+    FeedBackRepository feedbackRepository;
 
     @Override
     public FeedBack addFeedback(FeedBack feedBack) {

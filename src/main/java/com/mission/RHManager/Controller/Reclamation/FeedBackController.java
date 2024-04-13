@@ -1,10 +1,8 @@
 package com.mission.RHManager.Controller.Reclamation;
 
 
-import com.mission.RHManager.Entites.Dossier;
 import com.mission.RHManager.Entites.FeedBack;
-import com.mission.RHManager.Entites.Reclamation;
-import com.mission.RHManager.Services.Reclamation.FeedbackService;
+import com.mission.RHManager.Services.Reclamation.FeedBackService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Feedback")
+@RequestMapping("/FeedBack")
 @AllArgsConstructor
-public class FeedbackController {
-    private final FeedbackService feedbackService;
+public class FeedBackController {
+    private final FeedBackService feedbackService;
 
     @GetMapping
     public ResponseEntity<List<FeedBack>> getAllFeedback() {
