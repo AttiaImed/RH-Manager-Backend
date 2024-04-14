@@ -1,12 +1,10 @@
 package com.mission.RHManager.Services.Reclamation;
 
-import com.mission.RHManager.Entites.Dossier;
 import com.mission.RHManager.Entites.FeedBack;
-import com.mission.RHManager.Entites.Reclamation;
 
 import java.util.List;
 
-public interface FeedbackService {
+public interface FeedBackService {
 
     FeedBack addFeedback(FeedBack feedBack);
     FeedBack updateFeedBack(FeedBack feedBack);
