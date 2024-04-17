@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UtilisateurServiceImpl implements UtilisateurService {
-    UtilisateurRepository utilisateurRepository;
+    private final UtilisateurRepository utilisateurRepository;
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);

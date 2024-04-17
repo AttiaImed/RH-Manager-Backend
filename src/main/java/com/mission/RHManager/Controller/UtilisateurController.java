@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("utilisateur")
 @AllArgsConstructor
 public class UtilisateurController {
-    private UtilisateurService utilisateurService;
+    private final UtilisateurService utilisateurService;
 
     @PostMapping
     public ResponseEntity<Utilisateur> createUtilisateur(@RequestBody Utilisateur utilisateur) {
