@@ -3,6 +3,7 @@ package com.mission.RHManager.Services.Impl.Project;
 import com.mission.RHManager.Entites.Dossier;
 import com.mission.RHManager.Repositories.DossierRepository;
 import com.mission.RHManager.Services.Projet.DossierService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class DossierServiceImpl implements DossierService {
 
-    @Autowired
+
     DossierRepository dossierRepository;
 
     @Override

@@ -3,55 +3,83 @@ package com.mission.RHManager.Controller.Project;
 import com.mission.RHManager.Entites.Dossier;
 import com.mission.RHManager.Entites.Projet;
 import com.mission.RHManager.Services.Projet.ProjetService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Projet")
+@CrossOrigin(origins = "*")
+@RequestMapping("/Project")
+@RequiredArgsConstructor
 public class ProjetController {
 
-    @Autowired
-    ProjetService projetService;
+    private final ProjetService projetService;
 
-    @PostMapping("/add/{teamId}")
-    public Projet addProjet(@PathVariable Long teamId, @RequestBody Projet projet) {
-        return projetService.addProjet(teamId, projet);
+
+    // Merge Two Teams try it
+
+
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Projet>> getAllProjects()  {
+        //ModelMapper modelMapper = new ModelMapper();
+        List<Projet> teams = projetService.getAllProjet();
+
+        return new ResponseEntity<List<Projet>>(teams,HttpStatus.OK);
+
+    }
+    @PostMapping(path="/{teamId}",consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Projet CreateProject(@PathVariable long teamId, @RequestBody Projet projetResponse) {
+        Projet p = projetService.addProjet(teamId, projetResponse);
+
+        return p;
+    }
+    @GetMapping(path="/{id}")
+    public Projet getProjectById(@PathVariable long id) {
+
+        return projetService.getProjetById(id);
     }
 
-    @PutMapping("/update/{projectId}")
-    public Projet updateProjet(@PathVariable Long projectId, @RequestBody Projet projet) {
-        return projetService.updateProjet(projectId, projet);
+    @PatchMapping(path="/addfolder/{id}")
+    public Projet addFolder(@PathVariable long id, @RequestBody Dossier f) {
+        Projet p = projetService.addFolderToProject(id,f);
+        return p;
     }
 
-    @DeleteMapping("/delete/{projectId}")
-    public void deleteProjet(@PathVariable Long projectId) {
-        projetService.deleteProjet(projectId);
+    @PatchMapping(path="/folder/{id}")
+    public Projet updateFolder(@PathVariable long id, @RequestBody Dossier f) {
+        Projet p = projetService.updateFolder(id,f);
+        return p;
     }
 
-    @GetMapping("/get/{projectId}")
-    public Projet getProjet(@PathVariable Long projectId) {
-        return projetService.getProjet(projectId);
-    }
+    @PutMapping(path="/{projectId}")
+    public Projet updateProject(@PathVariable long projectId,@RequestBody Projet project) {
+        Projet p = projetService.updateProjet(projectId,project);
 
-    @GetMapping("/getAll")
-    public List<Projet> getAllProjet() {
-        return projetService.getAllProjet();
+        return p;
     }
-
-    @PostMapping("/{id}/addFolder")
-    public Projet addFolderToProject(@PathVariable Long id, @RequestBody Dossier dossier) {
-        return projetService.addFolderToProject(id, dossier);
+    // Delete Skill Based on it's id
+    @DeleteMapping(path="/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable long id) {
+        //Call SkillService to do the job
+        projetService.deleteProjet(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/getProjectsByUser/{userId}")
-    public List<Projet> getProjectsByUserId(@PathVariable Long userId) {
-        return projetService.getProjectsByUserId(userId);
+    //get project by user id
+    @GetMapping(path="/user/{id}")
+    public List<Projet> getProjectsByUserId(@PathVariable long id){
+        return projetService.getProjectsByUserId(id);
     }
-
-    @GetMapping("/getProjectsBySupervisor/{supervisorId}")
-    public List<Projet> getProjectsBySupervisorId(@PathVariable Long supervisorId) {
-        return projetService.getProjectsBySupervisorId(supervisorId);
+    //get project by superviserid id
+    @GetMapping(path="/superviser/{id}")
+    public List<Projet> getProjectsBySuperviserrId(@PathVariable long id){
+        return projetService.getProjectsBySupervisorId(id);
     }
 }

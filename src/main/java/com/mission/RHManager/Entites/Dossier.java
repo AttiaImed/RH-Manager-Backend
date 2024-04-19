@@ -1,5 +1,6 @@
 package com.mission.RHManager.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,15 +25,9 @@ public class Dossier {
      String nom;
      @OneToMany(mappedBy = "dossier")
      List<Tache> taches = new ArrayList<Tache>();
+     @JsonIgnore
      @ManyToOne
      Projet projet;
      String goals;
      String status;
-    public void addTask(Tache task) {
-        if(this.taches.isEmpty()) {
-            this.taches.add(0, task);
-        }else {
-            this.taches.add(task);
-        }
-    }
 }

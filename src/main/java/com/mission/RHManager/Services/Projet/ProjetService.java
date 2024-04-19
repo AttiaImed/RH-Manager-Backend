@@ -13,6 +13,7 @@ public interface ProjetService {
     public Projet updateProjet(Long projectId,Projet project);
 
     public void deleteProjet(Long projectId);
+    public Projet getProjetById(Long projectId);
 
     public Projet getProjet(Long projectId);
 
@@ -20,4 +21,6 @@ public interface ProjetService {
     public List<Projet> getProjectsByUserId(Long userId);
     public Projet addFolderToProject(Long id, Dossier folder);
     public List<Projet> getProjectsBySupervisorId(Long supervisorId);
+
+    Projet updateFolder(long id, Dossier f);
 }

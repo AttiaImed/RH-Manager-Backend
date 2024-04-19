@@ -8,6 +8,7 @@ import com.mission.RHManager.Repositories.DossierRepository;
 import com.mission.RHManager.Repositories.EquipeRepository;
 import com.mission.RHManager.Repositories.ProjetRepository;
 import com.mission.RHManager.Services.Projet.ProjetService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProjetServiceImpl implements ProjetService {
-    @Autowired
-    private ProjetRepository projectRepository;
-    @Autowired
-    private EquipeRepository equipeRepository;
-    @Autowired
-    private DossierRepository dossierRepository;
+    private final  ProjetRepository projectRepository;
+    private final EquipeRepository equipeRepository;
+    private final DossierRepository dossierRepository;
     @Override
     public Projet addProjet(Long teamId, Projet p) {
         Equipe team = equipeRepository.findById(teamId).get();
@@ -48,6 +47,11 @@ public class ProjetServiceImpl implements ProjetService {
     @Override
     public void deleteProjet(Long projectId) {
         projectRepository.deleteById(projectId);
+    }
+
+    @Override
+    public Projet getProjetById(Long projectId) {
+        return projectRepository.findById(projectId).get();
     }
 
     @Override
@@ -104,5 +108,20 @@ public class ProjetServiceImpl implements ProjetService {
 
         return supervisorProjects;
     }
+    @Override
+    public Projet updateFolder(long id,Dossier f) {
+        Projet project = projectRepository.findById(id).get();
+        project.getDossiers().forEach((el)->{
+            if(f.getNum() == el.getNum()) {
+                el.setTaches(f.getTaches());
+                el.setNom(f.getNom());
+                el.setStatus(f.getStatus());
+                el.setGoals(f.getGoals());
+            }
+        });
+
+        return projectRepository.save(project);
+    }
+
 
 }

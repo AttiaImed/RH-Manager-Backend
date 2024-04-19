@@ -1,5 +1,6 @@
 package com.mission.RHManager.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,6 +25,7 @@ public class SousTache {
     Date updated;
     @OneToOne
     Utilisateur user;
+    @JsonIgnore
     @ManyToOne
     Tache tache;
 }

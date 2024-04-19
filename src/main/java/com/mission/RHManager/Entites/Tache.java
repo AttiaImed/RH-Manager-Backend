@@ -1,5 +1,6 @@
 package com.mission.RHManager.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mission.RHManager.Entites.Enum.TacheStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,7 @@ public class Tache {
      String comments;
      LocalDate dateDebut;
      LocalDate dateFin;
+     @JsonIgnore
      @ManyToOne
      Dossier dossier;
      @OneToOne
