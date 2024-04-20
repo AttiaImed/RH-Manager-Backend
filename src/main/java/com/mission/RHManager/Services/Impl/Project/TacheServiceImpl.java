@@ -1,5 +1,6 @@
 package com.mission.RHManager.Services.Impl.Project;
 
+import com.mission.RHManager.Entites.SousTache;
 import com.mission.RHManager.Entites.Tache;
 import com.mission.RHManager.Repositories.TacheRepository;
 import com.mission.RHManager.Services.Projet.TacheService;
@@ -39,4 +40,15 @@ public class TacheServiceImpl implements TacheService {
     public List<Tache> getAllTache() {
         return tacheRepository.findAll();
     }
+
+    @Override
+    public List<Tache> getTodosByProjectIdAndUserId(long projectId, long userId) {
+        return tacheRepository.findTacheByIdAndMembersId(projectId, userId);
+    }
+
+    @Override
+    public List<List<SousTache>> getValidatedChecklistsByUser(long userId) {
+        return tacheRepository.findvalidatedChecklistsByUser(userId);
+    }
+
 }
