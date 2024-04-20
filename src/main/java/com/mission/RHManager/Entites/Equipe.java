@@ -1,6 +1,7 @@
 package com.mission.RHManager.Entites;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mission.RHManager.Entites.Enum.Domaine;
 import com.mission.RHManager.Services.UtilisateurService;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,7 @@ public class Equipe {
      long id;
      String nom ;
      String status;
+     String domaine;
      @JsonIgnore
      @OneToMany(mappedBy = "team")
     List<Projet> projets = new ArrayList<>();
