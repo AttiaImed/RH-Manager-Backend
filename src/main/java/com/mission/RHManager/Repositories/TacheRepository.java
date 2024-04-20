@@ -13,5 +13,5 @@ public interface TacheRepository extends JpaRepository<Tache, Long> {
     List<Tache> findTacheByIdAndMembersId(Long dossierId, Long memberId);
     List<Tache> findTacheByMembersId(Long id);
 
-    List<List<SousTache>> findvalidatedChecklistsByUser(long userId);
+    //List<List<SousTache>> findvalidatedChecklistsByUser(long userId);
 }

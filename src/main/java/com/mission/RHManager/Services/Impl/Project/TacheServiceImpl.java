@@ -4,6 +4,7 @@ import com.mission.RHManager.Entites.SousTache;
 import com.mission.RHManager.Entites.Tache;
 import com.mission.RHManager.Repositories.TacheRepository;
 import com.mission.RHManager.Services.Projet.TacheService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TacheServiceImpl implements TacheService {
 
-    @Autowired
-    TacheRepository tacheRepository;
+
+    private final TacheRepository tacheRepository;
 
     @Override
     public void addTache(Tache tache) {
@@ -48,7 +50,8 @@ public class TacheServiceImpl implements TacheService {
 
     @Override
     public List<List<SousTache>> getValidatedChecklistsByUser(long userId) {
-        return tacheRepository.findvalidatedChecklistsByUser(userId);
+//        return tacheRepository.findvalidatedChecklistsByUser(userId);
+        return null;
     }
 
 }
