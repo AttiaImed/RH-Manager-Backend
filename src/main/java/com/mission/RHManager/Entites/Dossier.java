@@ -30,4 +30,5 @@ public class Dossier {
      Projet projet;
      String goals;
      String status;
+     int progress;
 }

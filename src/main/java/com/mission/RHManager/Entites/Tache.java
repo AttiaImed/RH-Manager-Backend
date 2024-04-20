@@ -30,7 +30,7 @@ public class Tache {
      @Enumerated(EnumType.STRING)
      TacheStatus status;
      int progress;
-     boolean priority;
+     String priority;
      String comments;
      LocalDate dateDebut;
      LocalDate dateFin;
