@@ -32,6 +32,15 @@ public class UtilisateurController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Utilisateur> getUtilisateurByEmail(@PathVariable String email) {
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByEmail(email);
+        if (utilisateur != null) {
+            return new ResponseEntity<>(utilisateur, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping
     public ResponseEntity<List<Utilisateur>> getAllUtilisateurs() {

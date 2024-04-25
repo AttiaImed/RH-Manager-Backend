@@ -23,6 +23,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
         return utilisateurOptional.orElse(null);
     }
+    @Override
+    public Utilisateur getUtilisateurByEmail(String email) {
+        Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findByEmail(email);
+        return utilisateurOptional.orElse(null);
+    }
 
     @Override
     public List<Utilisateur> getAllUtilisateurs() {
