@@ -1,5 +1,6 @@
 package com.mission.RHManager.config;
 
+import com.mission.RHManager.Entites.Utilisateur;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -35,17 +36,19 @@ public class JwtService {
     }
 
     //generate token with user details as parameter
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(Utilisateur userDetails) {
         return generateToken(Map.of(), userDetails);
     }
     //generate token with extra claims and user details as parameter
     public String generateToken(
             Map<String, Object> extraClaims,
-            UserDetails userDetails
+            Utilisateur userDetails
     ) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
+                .setId(userDetails.getId().toString())
+                .claim("role", userDetails.getType())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 //10 hours

@@ -30,8 +30,8 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .type(TypeUser.EMPLOYE)
                 .build();
-        utilisateurRepository.save(user);
-        var jwt = jwtService.generateToken(user);
+        Utilisateur userResponse =  utilisateurRepository.save(user);
+        var jwt = jwtService.generateToken(userResponse);
         return AuthenticationResponse.builder().token(jwt).build();
     }
 
@@ -41,7 +41,7 @@ public class AuthenticationService {
                         authenticationRequest.getEmail(),
                         authenticationRequest.getPassword())
         );
-        var user = utilisateurRepository.findByEmail(authenticationRequest.getEmail()).get();
+        var user = utilisateurRepository.findByEmail(authenticationRequest.getEmail()).orElse(null);
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwt).build();
     }

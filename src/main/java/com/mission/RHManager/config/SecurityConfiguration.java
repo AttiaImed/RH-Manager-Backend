@@ -40,11 +40,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-//                                .requestMatchers("utilisateur/**").hasAnyRole(TypeUser.ADMINISTRATEUR.name())
-//                                .requestMatchers(GET, "v1/management/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
-//                                .requestMatchers(POST, "/v1/management/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
-//                                .requestMatchers(PUT, "/v1/management/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
-//                                .requestMatchers(DELETE, "/v1/management/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
+                                .requestMatchers(DELETE, "/Project/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
+                                .requestMatchers(DELETE, "/Equipe/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
+
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -52,7 +50,6 @@ public class SecurityConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         ;
-
         return http.build();
     }
 }

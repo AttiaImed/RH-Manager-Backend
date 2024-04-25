@@ -24,11 +24,12 @@ public class ProjetServiceImpl implements ProjetService {
     private final DossierRepository dossierRepository;
     @Override
     public Projet addProjet(Long teamId, Projet p) {
-        Equipe team = equipeRepository.findById(teamId).get();
+        Equipe team = equipeRepository.findById(teamId).orElse(null);
         LocalDateTime now = LocalDateTime.now();
         p.setStartDate(now);
         p.setTeam(team);
         Projet project = projectRepository.save(p);
+        assert team != null;
         team.addProject(project);
         equipeRepository.save(team);
         return project;
