@@ -48,4 +48,19 @@ public class CongeServiceImpl implements CongeService {
     public void deleteConge(Long id) {
         congeRepository.deleteById(id);
     }
+
+    @Override
+    public int getCasualLeaveCount() {
+        return congeRepository.countCasualLeave();
+    }
+
+    @Override
+    public int getSickLeaveCount() {
+        return congeRepository.countSickLeave();
+    }
+
+    @Override
+    public int getPersonalDaysCount() {
+        return congeRepository.countPersonalDays();
+    }
 }

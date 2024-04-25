@@ -9,4 +9,8 @@ public interface CongeService {
     List<Conge> getAllConges();
     Conge updateConge(Long id, Conge conge);
     void deleteConge(Long id);
+    int getCasualLeaveCount();
+    int getSickLeaveCount();
+    int getPersonalDaysCount();
+
 }

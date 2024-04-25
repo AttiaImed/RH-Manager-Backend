@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RequestMapping("/conges")
 public class CongeController {
-CongeService congeService;
+private final CongeService congeService;
+
+    public CongeController(CongeService congeService) {
+        this.congeService = congeService;
+    }
 
 
     @PostMapping
@@ -36,4 +40,21 @@ CongeService congeService;
     public void deleteConge(@PathVariable Long id) {
         congeService.deleteConge(id);
     }
+
+
+    @GetMapping("/casual-leave-count")
+    public int getCasualLeaveCount() {
+        return congeService.getCasualLeaveCount();
+    }
+
+    @GetMapping("/sick-leave-count")
+    public int getSickLeaveCount() {
+        return congeService.getSickLeaveCount();
+    }
+
+    @GetMapping("/personal-days-count")
+    public int getPersonalDaysCount() {
+        return congeService.getPersonalDaysCount();
+    }
+
 }

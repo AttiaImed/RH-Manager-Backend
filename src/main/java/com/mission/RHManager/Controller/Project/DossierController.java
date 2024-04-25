@@ -2,6 +2,7 @@ package com.mission.RHManager.Controller.Project;
 
 import com.mission.RHManager.Entites.Dossier;
 import com.mission.RHManager.Services.Projet.DossierService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,11 @@ import java.util.Optional;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/Dossier")
+@RequiredArgsConstructor
 public class DossierController {
 
-    @Autowired
-    DossierService dossierService;
+
+    private final DossierService dossierService;
 
     @PostMapping
     public ResponseEntity<Dossier> addDossier(@RequestBody Dossier dossier) {
