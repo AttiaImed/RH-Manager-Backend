@@ -44,13 +44,10 @@ public class AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getEmail(),
-                        authenticationRequest.getPassword()
-                )
+                        authenticationRequest.getPassword())
         );
         var user = utilisateurRepository.findByEmail(authenticationRequest.getEmail()).orElse(null);
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwt).build();
     }
-
-
 }
