@@ -7,6 +7,7 @@ import com.mission.RHManager.Entites.Auth.RegisterRequest;
 import com.mission.RHManager.Entites.Enum.TypeUser;
 import com.mission.RHManager.Entites.Utilisateur;
 import com.mission.RHManager.Repositories.UtilisateurRepository;
+import com.mission.RHManager.Services.EmailService;
 import com.mission.RHManager.config.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +22,8 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    private final EmailService emailService;
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         var user = Utilisateur.builder()
                 .email(registerRequest.getEmail())
@@ -31,6 +34,7 @@ public class AuthenticationService {
                 .type(TypeUser.EMPLOYE)
                 .build();
         Utilisateur userResponse =  utilisateurRepository.save(user);
+        emailService.sendEmailWithTemplate(userResponse);
         var jwt = jwtService.generateToken(userResponse);
         return AuthenticationResponse.builder().token(jwt).build();
     }
