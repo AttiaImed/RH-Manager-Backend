@@ -46,7 +46,6 @@ public class ProjetController {
 
         return projetService.getProjetById(id);
     }
-
     @PatchMapping(path="/addfolder/{id}")
     public Projet addFolder(@PathVariable long id, @RequestBody Dossier f) {
         Projet p = projetService.addFolderToProject(id,f);
