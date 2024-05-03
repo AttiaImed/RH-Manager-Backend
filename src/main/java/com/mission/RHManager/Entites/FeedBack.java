@@ -25,9 +25,7 @@ public class FeedBack {
      String description;
      @Enumerated(EnumType.STRING)
      TypeFeedBack typeFeedBack;
-     @ManyToOne()
-     Utilisateur utilisateurManagerFeedBack;
-     @ManyToOne()
+     @ManyToOne
      Utilisateur utilisateurEmployeFeedBack;
 
 }
