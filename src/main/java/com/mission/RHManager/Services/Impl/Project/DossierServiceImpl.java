@@ -14,8 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DossierServiceImpl implements DossierService {
 
-
-    DossierRepository dossierRepository;
+    private final DossierRepository dossierRepository;
 
     @Override
     public Dossier addDossier(Dossier dossier) {

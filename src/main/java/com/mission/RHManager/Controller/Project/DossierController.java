@@ -1,7 +1,9 @@
 package com.mission.RHManager.Controller.Project;
 
 import com.mission.RHManager.Entites.Dossier;
+import com.mission.RHManager.Entites.Projet;
 import com.mission.RHManager.Services.Projet.DossierService;
+import com.mission.RHManager.Services.Projet.ProjetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +21,13 @@ public class DossierController {
 
 
     private final DossierService dossierService;
-
-    @PostMapping
-    public ResponseEntity<Dossier> addDossier(@RequestBody Dossier dossier) {
+    private final ProjetService projetService;
+    @PostMapping(path="/{projetId}")
+    public ResponseEntity<Dossier> addDossier(@PathVariable long projetId,@RequestBody Dossier dossier) {
+        Projet projet = projetService.getProjetById(projetId);
         Dossier dossierResponse = dossierService.addDossier(dossier);
+        projet.getDossiers().add(dossierResponse);
+        projetService.updateProjet(projetId,projet);
         return new ResponseEntity<Dossier>(HttpStatus.CREATED);
     }
 
