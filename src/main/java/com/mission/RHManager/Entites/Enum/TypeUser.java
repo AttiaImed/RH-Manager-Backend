@@ -1,5 +1,5 @@
 package com.mission.RHManager.Entites.Enum;
 
 public enum TypeUser {
-    RH, EMPLOYE, ADMINISTRATEUR, MANAGER,DIRECTOR
+    RH, EMPLOYE, ADMINISTRATEUR, MANAGER,DIRECTOR,USER
 }

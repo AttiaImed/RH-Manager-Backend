@@ -1,6 +1,7 @@
-package com.mission.RHManager.Services;
+package com.mission.RHManager.Services.Impl;
 
 import com.mission.RHManager.Entites.Utilisateur;
+import com.mission.RHManager.Services.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

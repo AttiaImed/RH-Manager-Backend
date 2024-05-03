@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.DELETE;
+import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -38,6 +39,7 @@ public class SecurityConfiguration {
                                 .permitAll()
                                 .requestMatchers(DELETE, "/Project/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
                                 .requestMatchers(DELETE, "/Equipe/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
+                                .requestMatchers(PUT, "/Reclamation/**").hasAnyAuthority(TypeUser.RH.name(), TypeUser.EMPLOYE.name())
 
                                 .anyRequest()
                                 .authenticated()
