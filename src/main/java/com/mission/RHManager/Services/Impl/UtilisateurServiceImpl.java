@@ -49,3 +49,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         utilisateurRepository.deleteById(id);
     }
 }
+
+//get the current loogin user
+//Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        if(principal instanceof UserDetails){
+//UserDetails userDetails = (UserDetails) principal;
+//String username = userDetails.getUsername();
+//// use username or userDetails as needed
+//        }else{
+//String username = principal.toString();
+//// handle cases where the principal is not an instance of UserDetails
+//        }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("Reclamation")
+@RequestMapping("/Reclamation")
 @AllArgsConstructor
 public class ReclamationController {
     private ReclamationService reclamationService;
