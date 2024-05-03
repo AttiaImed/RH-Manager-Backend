@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("utilisateur")
+@RequestMapping("Utilisateur")
 @AllArgsConstructor
 public class UtilisateurController {
     private final UtilisateurService utilisateurService;
