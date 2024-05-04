@@ -4,10 +4,12 @@ import com.mission.RHManager.Entites.Conge;
 
 import com.mission.RHManager.Services.Projet.CongeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/conges")
+@Validated
 public class CongeController {
 private final CongeService congeService;
 
