@@ -1,10 +1,13 @@
 package com.mission.RHManager.Controller.Project;
 
+import com.mission.RHManager.Entites.Dossier;
+import com.mission.RHManager.Entites.Enum.TacheStatus;
 import com.mission.RHManager.Entites.SousTache;
 import com.mission.RHManager.Entites.Tache;
 import com.mission.RHManager.Repositories.EquipeRepository;
 import com.mission.RHManager.Repositories.ProjetRepository;
 import com.mission.RHManager.Repositories.TacheRepository;
+import com.mission.RHManager.Services.Projet.DossierService;
 import com.mission.RHManager.Services.Projet.TacheService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +25,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class TacheController {
-    private final EquipeRepository equipeRepository;
-    private final ProjetRepository projectRepository;
-
+    private final DossierService dossierService;
     private final TacheRepository todosRepository;
     private final TacheService todosService;
 
@@ -35,10 +36,23 @@ public class TacheController {
         return new ResponseEntity<List<Tache>>(teams, HttpStatus.OK);
 
     }
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(path = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Tache CreateTask(@RequestBody Tache task) {
-        return todosRepository.save(task);
+    public Tache CreateTask(@PathVariable long id,@RequestBody Tache task) {
+        Dossier dossier = dossierService.getDossier(id);
+        Tache tachein = new Tache();
+        tachein.setPriority(task.getPriority());
+        tachein.setDescription(task.getDescription());
+        tachein.setDateDebut(task.getDateDebut());
+        tachein.setDateFin(task.getDateFin());
+        tachein.setNom(task.getNom());
+        tachein.setProgress(0);
+        tachein.setStatus(TacheStatus.valueOf(task.getStatus().name()));
+        tachein.setDossier(dossier);
+        Tache tacheRes =  todosRepository.save(tachein);
+        dossier.getTaches().add(tacheRes);
+        dossierService.updateDossier(dossier);
+        return tacheRes;
     }
     @GetMapping(path="/{id}")
     public Tache getProjectById(@PathVariable long id) {
@@ -47,6 +61,7 @@ public class TacheController {
 
     @PutMapping
     public Tache updateTodo(@RequestBody Tache todo) {
+
         return todosRepository.save(todo);
     }
 
@@ -77,5 +92,7 @@ public class TacheController {
     public List<List<SousTache>> getValidatedChecklistsByUser(@PathVariable long userId) {
         return todosService.getValidatedChecklistsByUser(userId);
     }
+
+
 }
 

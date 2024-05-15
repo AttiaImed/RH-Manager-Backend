@@ -25,16 +25,27 @@ public class DossierController {
     @PostMapping(path="/{projetId}")
     public ResponseEntity<Dossier> addDossier(@PathVariable long projetId,@RequestBody Dossier dossier) {
         Projet projet = projetService.getProjetById(projetId);
-        Dossier dossierResponse = dossierService.addDossier(dossier);
+        Dossier dossierInput = new Dossier();
+        dossierInput.setGoals(dossier.getGoals());
+        dossierInput.setNom(dossier.getNom());
+        dossierInput.setProjet(projet);
+        dossierInput.setStatus("Open");
+        Dossier dossierResponse = dossierService.addDossier(dossierInput);
         projet.getDossiers().add(dossierResponse);
         projetService.updateProjet(projetId,projet);
         return new ResponseEntity<Dossier>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Dossier> updateDossier(@PathVariable Long id,@RequestBody Dossier dossier) {
-        dossier.setId(id); // Set the ID from the path variable into the Dossier object
-        Dossier dossierResponse = dossierService.updateDossier(dossier);
+    public ResponseEntity<Dossier> updateDossier(@PathVariable long id,@RequestBody Dossier dossier) {
+        Dossier dossier1 = dossierService.getDossier(id);
+        dossier1.setNom(dossier.getNom());
+        dossier1.setGoals(dossier.getGoals());
+        dossier1.setStatus(dossier.getStatus());
+        if(dossier1.getStatus().equals("Completed")){
+            dossier1.setProgress(100);
+        }
+        Dossier dossierResponse = dossierService.updateDossier(dossier1);
         return new ResponseEntity<Dossier>(dossierResponse,HttpStatus.OK);
     }
 
