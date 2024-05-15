@@ -1,5 +1,6 @@
 package com.mission.RHManager.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mission.RHManager.Entites.Enum.TypeUser;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,7 +33,14 @@ public class Utilisateur implements UserDetails {
      @Enumerated(EnumType.STRING)
      TypeUser type;
 
-     //assing roles to authorities
+
+ @OneToMany(mappedBy = "utilisateur")
+         @JsonIgnore
+  List<Presence> presences;
+
+
+
+ //assing roles to authorities
  @Override
  public Collection<? extends GrantedAuthority> getAuthorities() {
   return List.of(new SimpleGrantedAuthority(type.name()));

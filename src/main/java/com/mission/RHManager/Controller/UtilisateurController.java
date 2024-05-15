@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("Utilisateur")
+@RequestMapping("utilisateur")
 @AllArgsConstructor
 public class UtilisateurController {
     private final UtilisateurService utilisateurService;
@@ -40,11 +40,7 @@ public class UtilisateurController {
     @GetMapping("/{id}")
     public ResponseEntity<Utilisateur> getUtilisateurById(@PathVariable Long id) {
         Utilisateur utilisateur = utilisateurService.getUtilisateurById(id);
-        if (utilisateur != null) {
-            return new ResponseEntity<>(utilisateur, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(utilisateur, HttpStatus.OK);
     }
     @GetMapping("/email/{email}")
     public ResponseEntity<Utilisateur> getUtilisateurByEmail(@PathVariable String email) {
