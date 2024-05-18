@@ -42,6 +42,8 @@ public class SecurityConfiguration {
                                 .requestMatchers(PUT, "/Reclamation/**").hasAnyAuthority(TypeUser.RH.name(), TypeUser.EMPLOYE.name())
                                 .requestMatchers(DELETE, "/Utilisateur/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
                                 .requestMatchers(PUT, "/Utilisateur/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
+                                .requestMatchers(PUT, "/FeedBack/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name(),TypeUser.EMPLOYE.name())
+                                .requestMatchers(DELETE, "/FeedBack/**").hasAnyAuthority(TypeUser.ADMINISTRATEUR.name())
 
                                 .anyRequest()
                                 .authenticated()
