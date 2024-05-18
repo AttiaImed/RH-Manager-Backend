@@ -1,6 +1,7 @@
 package com.mission.RHManager.Services.Impl.Project;
 
 import com.mission.RHManager.Entites.Conge;
+import com.mission.RHManager.Entites.Enum.ApprovalStatus;
 import com.mission.RHManager.Repositories.CongeRepository;
 import com.mission.RHManager.Services.Projet.CongeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +64,23 @@ public class CongeServiceImpl implements CongeService {
     public int getPersonalDaysCount() {
         return congeRepository.countPersonalDays();
     }
+
+    @Override
+    public Conge updateApprovalStatus(Long id, ApprovalStatus status) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Invalid Conge ID: " + id);
+        }
+        if (status == null) {
+            throw new IllegalArgumentException("ApprovalStatus cannot be null");
+        }
+        Optional<Conge> optionalConge = congeRepository.findById(id);
+        if (optionalConge.isPresent()) {
+            Conge conge = optionalConge.get();
+            conge.setStatus(status);
+            return congeRepository.save(conge);
+        } else {
+            throw new RuntimeException("Conge with id " + id + " not found");
+        }
+    }
+
 }

@@ -23,7 +23,7 @@ public class SousTache {
     String text;
     boolean isChecked; // Changed column name to avoid conflict with SQL reserved keyword
     Date updated;
-    @OneToOne
+    @ManyToOne
     Utilisateur user;
     @JsonIgnore
     @ManyToOne

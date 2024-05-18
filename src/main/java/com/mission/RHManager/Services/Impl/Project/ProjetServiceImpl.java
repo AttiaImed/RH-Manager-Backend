@@ -113,7 +113,7 @@ public class ProjetServiceImpl implements ProjetService {
     public Projet updateFolder(long id,Dossier f) {
         Projet project = projectRepository.findById(id).get();
         project.getDossiers().forEach((el)->{
-            if(f.getNum() == el.getNum()) {
+            if(f.getId() == el.getId()) {
                 el.setTaches(f.getTaches());
                 el.setNom(f.getNom());
                 el.setStatus(f.getStatus());

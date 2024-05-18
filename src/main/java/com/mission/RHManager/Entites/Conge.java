@@ -1,9 +1,11 @@
 package com.mission.RHManager.Entites;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.mission.RHManager.Entites.Enum.ApprovalStatus;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -29,5 +31,11 @@ public class Conge {
      String type;
     @NotBlank(message = "Description is required")
      String description;
+
+    @Enumerated(EnumType.STRING)
+    private ApprovalStatus status;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    Utilisateur utilisateur;
 
 }
