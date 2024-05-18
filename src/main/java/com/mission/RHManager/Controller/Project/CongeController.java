@@ -2,10 +2,14 @@ package com.mission.RHManager.Controller.Project;
 
 import com.mission.RHManager.Entites.Conge;
 
+import com.mission.RHManager.Entites.Enum.ApprovalStatus;
 import com.mission.RHManager.Services.Projet.CongeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/conges")
@@ -59,4 +63,16 @@ private final CongeService congeService;
         return congeService.getPersonalDaysCount();
     }
 
+
+
+    @PutMapping("/{id}/approval")
+    public Conge updateApprovalStatus(@PathVariable Long id, @RequestBody ApprovalStatus status) {
+        try {
+            return congeService.updateApprovalStatus(id, status);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
+    }
 }

@@ -1,7 +1,9 @@
 package com.mission.RHManager.Services.Projet;
 
     import com.mission.RHManager.Entites.Conge;
-import java.util.List;
+    import com.mission.RHManager.Entites.Enum.ApprovalStatus;
+
+    import java.util.List;
 
 public interface CongeService {
     Conge saveConge(Conge conge);
@@ -12,5 +14,9 @@ public interface CongeService {
     int getCasualLeaveCount();
     int getSickLeaveCount();
     int getPersonalDaysCount();
+
+    Conge updateApprovalStatus(Long id, ApprovalStatus status);
+
+
 
 }
