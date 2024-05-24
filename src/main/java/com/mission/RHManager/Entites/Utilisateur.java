@@ -29,6 +29,7 @@ public class Utilisateur implements UserDetails {
      String prenom;
      String email;
      String password;
+     String Poste;
      boolean status;
      @Enumerated(EnumType.STRING)
      TypeUser type;

@@ -35,12 +35,4 @@ public class ChatController {
         return emailService.getAllMessages();
     }
 
-
-
-    @MessageMapping("/ws")
-    @SendTo("/topic/messages")
-    public Message sendMessage(Message message) {
-        message.setTimestamp(System.currentTimeMillis());
-        return message;
-    }
 }
