@@ -1,9 +1,11 @@
 package com.mission.RHManager.Services.Impl;
 
+import com.mission.RHManager.Entites.Auth.RegisterRequest;
 import com.mission.RHManager.Entites.Utilisateur;
 import com.mission.RHManager.Repositories.UtilisateurRepository;
 import com.mission.RHManager.Services.UtilisateurService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UtilisateurServiceImpl implements UtilisateurService {
     private final UtilisateurRepository utilisateurRepository;
+    PasswordEncoder passwordEncoder;
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);
@@ -43,6 +46,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             existingUtilisateur.setPrenom(utilisateur.getPrenom());
             existingUtilisateur.setEmail(utilisateur.getEmail());
             existingUtilisateur.setPassword(utilisateur.getPassword());
+            existingUtilisateur.setPassword(passwordEncoder.encode(existingUtilisateur.getPassword()));
             existingUtilisateur.setPoste(utilisateur.getPoste());
             existingUtilisateur.setStatus(utilisateur.isStatus());
              // You might want to handle updating other fields like 'presences' here

@@ -1,16 +1,21 @@
 package com.mission.RHManager.Services.Impl;
 
 import com.mission.RHManager.Entites.Presence;
+import com.mission.RHManager.Entites.Utilisateur;
 import com.mission.RHManager.Repositories.PresenceRepository;
 import com.mission.RHManager.Services.PresenceService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class PresenceImpl implements PresenceService {
-PresenceRepository presenceRepository;
+    PresenceRepository presenceRepository;
 
     @Override
     public Presence addPresence(Presence presence) {
@@ -24,8 +29,17 @@ PresenceRepository presenceRepository;
     }
 
     @Override
-    public List<Presence> getAllPresence() {
-        return presenceRepository.findAll();
+    public List<Utilisateur> getAllPresence() {
+        LocalDate today = LocalDate.now();
+        List<Presence> todayPresence = presenceRepository.findAll().stream()
+                .filter(presence -> presence.isPresence() && presence.getDate().isEqual(today))
+                .collect(Collectors.toList());
+
+        Set<Utilisateur> uniqueUsers = todayPresence.stream()
+                .map(Presence::getUtilisateur)
+                .collect(Collectors.toSet());
+
+        return List.copyOf(uniqueUsers);
     }
 
 
