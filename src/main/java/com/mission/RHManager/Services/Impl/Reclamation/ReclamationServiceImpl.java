@@ -1,5 +1,6 @@
 package com.mission.RHManager.Services.Impl.Reclamation;
 
+import com.mission.RHManager.Entites.Enum.ApprovalStatus;
 import com.mission.RHManager.Entites.Reclamation;
 import com.mission.RHManager.Entites.Utilisateur;
 import com.mission.RHManager.Repositories.ReclamationRepository;
@@ -16,6 +17,7 @@ public class ReclamationServiceImpl implements ReclamationService {
     ReclamationRepository reclamationRepository;
     @Override
     public Reclamation saveReclamation(Reclamation reclamation) {
+        reclamation.setStatus(ApprovalStatus.PENDING);
         return reclamationRepository.save(reclamation);
     }
 

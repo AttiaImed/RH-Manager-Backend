@@ -3,6 +3,7 @@ package com.mission.RHManager.Controller;
 
 import com.mission.RHManager.Entites.Presence;
 import com.mission.RHManager.Entites.Reclamation;
+import com.mission.RHManager.Entites.Utilisateur;
 import com.mission.RHManager.Services.PresenceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,8 +42,8 @@ private PresenceService presenceService;
     }
 
     @GetMapping
-    public ResponseEntity <List<Presence>>getAllPresence() {
-        List<Presence> presences = presenceService.getAllPresence();
+    public ResponseEntity <List<Utilisateur>>getAllPresence() {
+        List<Utilisateur> presences = presenceService.getAllPresence();
         return new ResponseEntity<>(presences, HttpStatus.OK);
     }
 
@@ -55,8 +56,4 @@ private PresenceService presenceService;
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
-
-
 }
