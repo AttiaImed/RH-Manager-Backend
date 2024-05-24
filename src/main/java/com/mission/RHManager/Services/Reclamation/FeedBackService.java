@@ -11,5 +11,6 @@ public interface FeedBackService {
     void deleteFeedBack(Long id);
     FeedBack getFeedBack(Long id);
     List<FeedBack> getAllFeedBack();
+    List<FeedBack> getUserFeedBack(long id);
 
 }

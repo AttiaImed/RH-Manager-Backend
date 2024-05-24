@@ -39,5 +39,10 @@ public class FeedBackController {
         feedBackService.deleteFeedBack(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @GetMapping("/myFeedBacks/{id}")
+    public ResponseEntity<List<FeedBack>> getUserFeedback(@PathVariable long id) {
+        List<FeedBack> feedBacks = feedBackService.getUserFeedBack(id);
+        return new ResponseEntity<>(feedBacks, HttpStatus.OK);
+    }
 
 }
