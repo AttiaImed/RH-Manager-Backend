@@ -101,4 +101,10 @@ public class UtilisateurController {
         emailService.sendEmailWithTemplate(user);
         return new ResponseEntity<String>("Mail sent", HttpStatus.OK);
     }
+
+    @GetMapping("count")
+    public ResponseEntity<Long> countUtilisateur() {
+        long count = utilisateurService.countUtilisateur();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
 }

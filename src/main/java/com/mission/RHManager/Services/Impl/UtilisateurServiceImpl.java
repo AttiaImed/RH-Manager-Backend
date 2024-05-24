@@ -36,9 +36,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur updateUtilisateur(Long id, Utilisateur utilisateur) {
-        if (utilisateurRepository.existsById(id)) {
-            utilisateur.setId(id);
-            return utilisateurRepository.save(utilisateur);
+        Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findById(id);
+        if (optionalUtilisateur.isPresent()) {
+            Utilisateur existingUtilisateur = optionalUtilisateur.get();
+            existingUtilisateur.setNom(utilisateur.getNom());
+            existingUtilisateur.setPrenom(utilisateur.getPrenom());
+            existingUtilisateur.setEmail(utilisateur.getEmail());
+            existingUtilisateur.setPassword(utilisateur.getPassword());
+            existingUtilisateur.setPoste(utilisateur.getPoste());
+            existingUtilisateur.setStatus(utilisateur.isStatus());
+             // You might want to handle updating other fields like 'presences' here
+
+            return utilisateurRepository.save(existingUtilisateur);
         } else {
             return null;
         }
@@ -48,8 +57,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public void deleteUtilisateur(Long id) {
         utilisateurRepository.deleteById(id);
     }
-}
 
+    @Override
+    public long countUtilisateur() {
+     return utilisateurRepository.count();
+    }
+}
 //get the current loogin user
 //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //

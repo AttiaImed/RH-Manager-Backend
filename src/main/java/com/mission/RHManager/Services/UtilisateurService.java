@@ -13,4 +13,6 @@ public interface UtilisateurService {
     List<Utilisateur> getAllUtilisateurs();
     Utilisateur updateUtilisateur(Long id, Utilisateur utilisateur);
     void deleteUtilisateur(Long id);
+
+    long countUtilisateur();
 }
