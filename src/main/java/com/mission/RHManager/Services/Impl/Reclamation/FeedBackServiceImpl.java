@@ -83,4 +83,9 @@ public class FeedBackServiceImpl implements FeedBackService {
     public List<FeedBack> getAllFeedBack() {
         return feedbackRepository.findAll();
     }
+    @Override
+    public List<FeedBack> getUserFeedBack(long id) {
+        Utilisateur user = utilisateurRepository.findById(id).get();
+        return feedbackRepository.findByUtilisateurEmployeFeedBack(user);
+    }
 }

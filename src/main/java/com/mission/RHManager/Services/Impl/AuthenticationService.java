@@ -5,7 +5,9 @@ import com.mission.RHManager.Entites.Auth.AuthenticationRequest;
 import com.mission.RHManager.Entites.Auth.AuthenticationResponse;
 import com.mission.RHManager.Entites.Auth.RegisterRequest;
 import com.mission.RHManager.Entites.Enum.TypeUser;
+import com.mission.RHManager.Entites.Presence;
 import com.mission.RHManager.Entites.Utilisateur;
+import com.mission.RHManager.Repositories.PresenceRepository;
 import com.mission.RHManager.Repositories.UtilisateurRepository;
 import com.mission.RHManager.Services.EmailService;
 import com.mission.RHManager.config.JwtService;
@@ -16,6 +18,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -23,6 +28,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final PresenceRepository presenceRepository;
 
     private final EmailService emailService;
     public AuthenticationResponse register(RegisterRequest registerRequest) {
@@ -48,6 +54,12 @@ public class AuthenticationService {
                 )
         );
         var user = utilisateurRepository.findByEmail(authenticationRequest.getEmail()).orElse(null);
+        Presence p = new Presence();
+        LocalDate l = LocalDate.now();
+        p.setDate(l);
+        p.setPresence(true);
+        p.setUtilisateur(user);
+        presenceRepository.save(p);
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwt).build();
     }

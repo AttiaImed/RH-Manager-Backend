@@ -1,31 +1,32 @@
 package com.mission.RHManager.Entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SousTache {
+@Getter
+@Setter
+
+public class Presence {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String text;
-    boolean isChecked; // Changed column name to avoid conflict with SQL reserved keyword
-    Date updated;
+
+    boolean presence;
+    private LocalDate date;
+
     @ManyToOne
-    Utilisateur user;
-    @JsonIgnore
-    @ManyToOne
-    Tache tache;
+     Utilisateur utilisateur;
+
 }

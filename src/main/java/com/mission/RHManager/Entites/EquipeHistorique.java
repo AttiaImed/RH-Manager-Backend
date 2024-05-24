@@ -1,6 +1,6 @@
 package com.mission.RHManager.Entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mission.RHManager.Entites.Enum.TypeHistoriqueEquipe;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -16,16 +16,16 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SousTache {
+public class EquipeHistorique {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String text;
-    boolean isChecked; // Changed column name to avoid conflict with SQL reserved keyword
-    Date updated;
+    TypeHistoriqueEquipe type;
+    String action;
+    Date date;
+    String acteur;
+
     @ManyToOne
-    Utilisateur user;
-    @JsonIgnore
-    @ManyToOne
-    Tache tache;
+    Equipe equipe;
+
 }

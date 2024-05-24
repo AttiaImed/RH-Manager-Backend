@@ -1,22 +1,33 @@
 package com.mission.RHManager.Services.Impl;
 
+import com.mission.RHManager.Entites.Message;
 import com.mission.RHManager.Entites.Utilisateur;
+import com.mission.RHManager.Repositories.MessageRepository;
+import com.mission.RHManager.Repositories.UtilisateurRepository;
 import com.mission.RHManager.Services.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
     private final JavaMailSender emailSender;
+    private final MessageRepository messageRepository;
+
+    private final UtilisateurRepository utilisateurRepository;
+
     @Override
     public void sendSimpleEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -114,4 +125,18 @@ public class EmailServiceImpl implements EmailService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Message saveMessage(Message message) {
+        Utilisateur sender = utilisateurRepository.findById(message.getSender().getId()).orElseThrow(() -> new RuntimeException("Sender not found"));
+        Utilisateur receiver = utilisateurRepository.findById(message.getReceiver().getId()).orElseThrow(() -> new RuntimeException("Receiver not found"));
+        message.setSender(sender);
+        message.setReceiver(receiver);
+        return messageRepository.save(message);
+    }
+    @Override
+    public List<Message> getAllMessages() {
+        return messageRepository.findAll();
+    }
+
 }

@@ -39,7 +39,7 @@ public class Tache {
      Dossier dossier;
      @OneToOne
      Utilisateur superviser;
-     @OneToMany
+     @ManyToMany
      List<Utilisateur> members;
      @OneToMany(mappedBy = "tache")
      List<SousTache> sousTaches = new ArrayList<SousTache>();

@@ -21,7 +21,6 @@ public class Dossier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      long id;
-     int num;
      String nom;
      @OneToMany(mappedBy = "dossier")
      List<Tache> taches = new ArrayList<Tache>();
