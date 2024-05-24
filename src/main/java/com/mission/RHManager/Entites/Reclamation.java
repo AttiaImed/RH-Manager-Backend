@@ -1,5 +1,6 @@
 package com.mission.RHManager.Entites;
 
+import com.mission.RHManager.Entites.Enum.ApprovalStatus;
 import com.mission.RHManager.Entites.Enum.TypeReclamation;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,6 +27,8 @@ public class Reclamation {
     String description;
     @Enumerated(EnumType.STRING)
     TypeReclamation typeReclamation;
+    @Enumerated(EnumType.STRING)
+    ApprovalStatus status;
 
     @ManyToOne
     Utilisateur utilisateurReclamation;
