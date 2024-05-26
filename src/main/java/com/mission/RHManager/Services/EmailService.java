@@ -11,4 +11,7 @@ public interface EmailService {
     void sendEmailWithTemplate(Utilisateur user);
     List<Message> getAllMessages();
     Message saveMessage(Message message);
+    List<Message> getMessagesByUserIds(Long senderId, Long receiverId);
+
+    Message sendMessage(Long senderId, Long receiverId, String content);
 }

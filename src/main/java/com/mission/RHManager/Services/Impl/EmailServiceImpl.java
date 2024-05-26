@@ -14,11 +14,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -127,7 +126,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public Message saveMessage(Message message) {
+    public Message  saveMessage(Message message) {
         Utilisateur sender = utilisateurRepository.findById(message.getSender().getId()).orElseThrow(() -> new RuntimeException("Sender not found"));
         Utilisateur receiver = utilisateurRepository.findById(message.getReceiver().getId()).orElseThrow(() -> new RuntimeException("Receiver not found"));
         message.setSender(sender);
@@ -139,4 +138,24 @@ public class EmailServiceImpl implements EmailService {
         return messageRepository.findAll();
     }
 
+    @Override
+    public List<Message> getMessagesByUserIds(Long senderId, Long receiverId) {
+        return messageRepository.findBySenderIdAndReceiverId(senderId, receiverId);
+    }
+    @Override
+    public Message sendMessage(Long senderId, Long receiverId, String content) {
+        Utilisateur sender = utilisateurRepository.findById(senderId)
+                .orElseThrow(() -> new RuntimeException("Sender not found"));
+
+        Utilisateur receiver = utilisateurRepository.findById(receiverId)
+                .orElseThrow(() -> new RuntimeException("Receiver not found"));
+
+        Message message = new Message();
+        message.setSender(sender);
+        message.setReceiver(receiver);
+        message.setContent(content);
+        message.setTimestamp(System.currentTimeMillis());
+
+        return messageRepository.save(message);
+    }
 }
