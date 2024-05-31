@@ -1,6 +1,8 @@
 package com.mission.RHManager.Entites;
 
 import com.mission.RHManager.Entites.Enum.ApprovalStatus;
+import com.mission.RHManager.Entites.Enum.TacheStatus;
+import com.mission.RHManager.Entites.Enum.ApprovalStatus;
 import com.mission.RHManager.Entites.Enum.TypeReclamation;
 import jakarta.persistence.*;
 import lombok.*;

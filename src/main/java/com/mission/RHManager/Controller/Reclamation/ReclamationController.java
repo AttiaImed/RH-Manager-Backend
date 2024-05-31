@@ -37,8 +37,9 @@ public class ReclamationController {
     @PutMapping("/{id}")
     public ResponseEntity<Reclamation> updateReclamation(@PathVariable Long id, @RequestBody Reclamation reclamation) {
         reclamation.setId(id);
-        reclamationService.updateReclamation(reclamation);
-        return new ResponseEntity<>(reclamation, HttpStatus.OK);
+
+        Reclamation r = reclamationService.updateReclamation(reclamation);
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteReclamation(@PathVariable Long id) {
