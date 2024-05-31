@@ -1,9 +1,11 @@
 package com.mission.RHManager.Services.Impl;
 
+import com.mission.RHManager.Entites.Auth.RegisterRequest;
 import com.mission.RHManager.Entites.Utilisateur;
 import com.mission.RHManager.Repositories.UtilisateurRepository;
 import com.mission.RHManager.Services.UtilisateurService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UtilisateurServiceImpl implements UtilisateurService {
     private final UtilisateurRepository utilisateurRepository;
+    PasswordEncoder passwordEncoder;
     @Override
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);
@@ -36,9 +39,19 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur updateUtilisateur(Long id, Utilisateur utilisateur) {
-        if (utilisateurRepository.existsById(id)) {
-            utilisateur.setId(id);
-            return utilisateurRepository.save(utilisateur);
+        Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findById(id);
+        if (optionalUtilisateur.isPresent()) {
+            Utilisateur existingUtilisateur = optionalUtilisateur.get();
+            existingUtilisateur.setNom(utilisateur.getNom());
+            existingUtilisateur.setPrenom(utilisateur.getPrenom());
+            existingUtilisateur.setEmail(utilisateur.getEmail());
+            existingUtilisateur.setPassword(utilisateur.getPassword());
+            existingUtilisateur.setPassword(passwordEncoder.encode(existingUtilisateur.getPassword()));
+            existingUtilisateur.setPoste(utilisateur.getPoste());
+            existingUtilisateur.setStatus(utilisateur.isStatus());
+             // You might want to handle updating other fields like 'presences' here
+
+            return utilisateurRepository.save(existingUtilisateur);
         } else {
             return null;
         }
@@ -48,8 +61,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public void deleteUtilisateur(Long id) {
         utilisateurRepository.deleteById(id);
     }
-}
 
+    @Override
+    public long countUtilisateur() {
+     return utilisateurRepository.count();
+    }
+}
 //get the current loogin user
 //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //

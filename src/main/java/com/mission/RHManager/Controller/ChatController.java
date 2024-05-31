@@ -3,6 +3,8 @@ package com.mission.RHManager.Controller;
 
 import com.mission.RHManager.Entites.Message;
 import com.mission.RHManager.Entites.Presence;
+import com.mission.RHManager.Entites.Response.SendMessageRequest;
+import com.mission.RHManager.Entites.Utilisateur;
 import com.mission.RHManager.Services.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,4 +37,19 @@ public class ChatController {
         return emailService.getAllMessages();
     }
 
+    @GetMapping("/messages")
+    public List<Message> getMessagesByUserIds(
+            @RequestParam("senderId") Long senderId,
+            @RequestParam("receiverId") Long receiverId) {
+        return emailService.getMessagesByUserIds(senderId, receiverId);
+    }
+
+    @PostMapping("/send-message")
+    public Message sendMessageBetweenUsers(@RequestBody SendMessageRequest request) {
+        Long senderId = request.getSenderId();
+        Long receiverId = request.getReceiverId();
+        String content = request.getContent();
+
+        return emailService.sendMessage(senderId, receiverId, content);
+    }
 }

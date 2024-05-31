@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -63,6 +64,22 @@ public class AuthenticationService {
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwt).build();
     }
+//    public AuthenticationResponse forgetPassword(ForgotPasswordRequest forgotPasswordRequest) {
+//        Utilisateur user = utilisateurRepository.findByEmail(forgotPasswordRequest.getEmail())
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        String newPassword = generateRandomPassword();
+//
+//        user.setPassword(passwordEncoder.encode(newPassword));
+//        utilisateurRepository.save(user);
+//
+//        emailService.sendPasswordResetEmail(user.getEmail(), newPassword);
+//
+//        return AuthenticationResponse.builder().message("Password reset successful. Check your email for the new password.").build();
+//    }
 
+    private String generateRandomPassword() {
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
 
 }
