@@ -64,6 +64,11 @@ public class AuthenticationService {
         var jwt = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwt).build();
     }
+    public AuthenticationResponse authenticateWithuserId(long userId) {
+        var user = utilisateurRepository.findById((long) userId).orElse(null);
+        var jwt = jwtService.generateToken(user);
+        return AuthenticationResponse.builder().token(jwt).build();
+    }
 //    public AuthenticationResponse forgetPassword(ForgotPasswordRequest forgotPasswordRequest) {
 //        Utilisateur user = utilisateurRepository.findByEmail(forgotPasswordRequest.getEmail())
 //                .orElseThrow(() -> new RuntimeException("User not found"));

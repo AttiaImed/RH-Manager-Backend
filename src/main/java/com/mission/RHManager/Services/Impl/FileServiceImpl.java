@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -58,6 +59,11 @@ public class FileServiceImpl implements FileService {
                         HttpStatus.NOT_FOUND,
                         "Oops! We couldn't find your profile picture, but we're working to bring it back soon! Stay tuned!",
                         new FileNotFoundException("File not found with id " + userId)));
+    }
+
+    @Override
+    public List<FileEntity> getAllFiles() {
+        return dbFileRepository.findAll();
     }
 
 }

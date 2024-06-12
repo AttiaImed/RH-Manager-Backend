@@ -22,5 +22,9 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest authenticationRequest) {
         return ResponseEntity.ok(authenticationService.authenticate(authenticationRequest));
     }
+    @PostMapping("/authenticate/{userId}")
+    public ResponseEntity<AuthenticationResponse> authenticate(@PathVariable long userId) {
+        return ResponseEntity.ok(authenticationService.authenticateWithuserId(userId));
+    }
 
 }

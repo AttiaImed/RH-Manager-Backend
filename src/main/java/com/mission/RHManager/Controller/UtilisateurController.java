@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
@@ -94,7 +95,14 @@ public class UtilisateurController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
                 .body(new ByteArrayResource(dbFile.getData()));
     }
-
+    @GetMapping("/files")
+    public ResponseEntity<List<Resource>> getAllFiles() {
+        List<FileEntity> files = dbFileStorageService.getAllFiles();
+        List<Resource> resources = files.stream()
+                .map(file -> new ByteArrayResource(file.getData()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(resources);
+    }
     @PostMapping("/mail/{userId}")
     public ResponseEntity<String> sendMail(@PathVariable long userId) {
         Utilisateur user = utilisateurService.getUtilisateurById(userId);
@@ -107,4 +115,5 @@ public class UtilisateurController {
         long count = utilisateurService.countUtilisateur();
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
+
 }

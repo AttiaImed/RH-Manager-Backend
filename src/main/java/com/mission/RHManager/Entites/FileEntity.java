@@ -1,5 +1,6 @@
 package com.mission.RHManager.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +22,7 @@ public class FileEntity {
 
     String fileType;
     @ManyToOne
+    @JsonIgnore
     Utilisateur user;
     @Lob
     @Basic(fetch = FetchType.LAZY)
